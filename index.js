@@ -20,4 +20,16 @@ app.post('/', async(req, res) =>{
     res.send('Data inserted!');
 })
 
+app.put('/:name', async(req, res) => {
+    let result = await dbConnect();
+    result = await result.updateOne({name: req.params.name}, {$set:req.body});
+    res.send("Data updated!");
+})
+
+app.delete('/:name', async(req, res) => {
+    let result = await dbConnect();
+    result = await result.deleteOne({name:req.params.name});
+    res.send("Data deleted!");
+})
+
 app.listen(3000);
